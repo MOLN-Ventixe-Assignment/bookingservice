@@ -12,7 +12,6 @@ public class BookingEntity
 
     public int TicketQuantity { get; set; } = 1;
 
-    //[Column(TypeName = "datetime2")]
     public DateTime BookingDate { get; set; }
 
     [ForeignKey(nameof(BookingOwner))]

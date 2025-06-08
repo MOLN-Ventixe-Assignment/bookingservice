@@ -32,6 +32,11 @@ public class BookingService(IBookingRepository bookingRepository) : IBookingServ
             };
 
             var result = await _bookingRepository.AddAsync(bookingEntity);
+
+            //This is the first draft for using an email service in Azure to send a Verification Email 
+            //To Do: Next step is to create an EmailService microservice and publish it to Azure. That service will then be called on to send the e-mail.
+            EmailService.SendEmail(bookingEntity.BookingOwner.Email, bookingEntity.EventId, bookingEntity.TicketQuantity);
+
             return result.Success
                 ? new BookingResult { Success = true }
                 : new BookingResult { Success = false, Error = result.Error };
